@@ -8,6 +8,6 @@
 
 > Open the software, it will ask you for the project directory and synchronization interval, just enter it into the program, it will help you synchronize, and then that's it.
 
-## Team of Services:
+## License:
 
 > Open Source by GPLv3.
