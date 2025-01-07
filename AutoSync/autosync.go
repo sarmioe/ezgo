@@ -26,6 +26,7 @@ func generateRandomCommitMessage() string {
 }
 
 func main() {
+	fmt.Println("Welcome to AutoSync!")
 	fmt.Print("Enter the Git repository path: ")
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
