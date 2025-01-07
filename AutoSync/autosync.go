@@ -62,24 +62,34 @@ func main() {
 
 		if len(out) > 0 {
 			fmt.Println("Changes detected in the repository.")
-			commitMessage := generateRandomCommitMessage()
-			fmt.Printf("Committing changes with message: %s\n", commitMessage)
+			fmt.Print("Do you want to sync these changes? (y/n): ")
+			scanner.Scan()
+			response := scanner.Text()
 
-			cmd = exec.Command("git", "-C", repoPath, "commit", "-m", commitMessage)
-			err = cmd.Run()
-			if err != nil {
-				fmt.Printf("Error committing changes: %v\n", err)
-				continue
+			if response == "y" {
+				commitMessage := generateRandomCommitMessage()
+				fmt.Printf("Committing changes with message: %s\n", commitMessage)
+
+				cmd = exec.Command("git", "-C", repoPath, "commit", "-m", commitMessage)
+				err = cmd.Run()
+				if err != nil {
+					fmt.Printf("Error committing changes: %v\n", err)
+					continue
+				}
+
+				cmd = exec.Command("git", "-C", repoPath, "push")
+				err = cmd.Run()
+				if err != nil {
+					fmt.Printf("Error pushing changes: %v\n", err)
+					continue
+				}
+
+				fmt.Println("Changes committed and pushed successfully.")
+			} else if response == "n" {
+				fmt.Println("Skipping sync. Waiting for the next check...")
+			} else {
+				fmt.Println("Invalid input. Please enter 'y' or 'n'.")
 			}
-
-			cmd = exec.Command("git", "-C", repoPath, "push")
-			err = cmd.Run()
-			if err != nil {
-				fmt.Printf("Error pushing changes: %v\n", err)
-				continue
-			}
-
-			fmt.Println("Changes committed and pushed successfully.")
 		} else {
 			fmt.Println("No changes detected.")
 		}
