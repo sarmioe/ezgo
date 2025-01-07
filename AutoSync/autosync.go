@@ -44,7 +44,15 @@ func main() {
 	rand.Seed(time.Now().UnixNano())
 
 	for {
-		cmd := exec.Command("git", "-C", repoPath, "status", "--porcelain")
+		cmd := exec.Command("git", "-C", repoPath, "add", ".")
+		err := cmd.Run()
+		if err != nil {
+			fmt.Printf("Error adding changes: %v\n", err)
+			time.Sleep(syncInterval)
+			continue
+		}
+
+		cmd = exec.Command("git", "-C", repoPath, "status", "--porcelain")
 		out, err := cmd.Output()
 		if err != nil {
 			fmt.Printf("Error checking repository status: %v\n", err)
@@ -56,13 +64,6 @@ func main() {
 			fmt.Println("Changes detected in the repository.")
 			commitMessage := generateRandomCommitMessage()
 			fmt.Printf("Committing changes with message: %s\n", commitMessage)
-
-			cmd = exec.Command("git", "-C", repoPath, "add", ".")
-			err = cmd.Run()
-			if err != nil {
-				fmt.Printf("Error adding changes: %v\n", err)
-				continue
-			}
 
 			cmd = exec.Command("git", "-C", repoPath, "commit", "-m", commitMessage)
 			err = cmd.Run()
