@@ -26,7 +26,7 @@ func generateRandomCommitMessage() string {
 }
 
 func main() {
-	fmt.Println("Welcome to AutoSync!")
+	fmt.Println("Welcome to EasyGo!")
 	fmt.Print("Enter the Git repository path: ")
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
@@ -92,7 +92,7 @@ func main() {
 				fmt.Println("Invalid input. Please enter 'y' or 'n'.")
 			}
 		} else {
-			fmt.Println("No changes detected.")
+			fmt.Println("No changes detected , If you not need sync , please enter 'ctrl+c' to exit.")
 		}
 
 		time.Sleep(syncInterval)
