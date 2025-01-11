@@ -1,6 +1,6 @@
 # EasyGo es un programa que hace que Git y Mo CloudSpace sean fáciles de usar.
 
-> La razón principal es que me volví loco con Git cuando lo usé para enviar MoMit, así que decidí crear este, que admite la sincronización automática.
+> La razón principal es que me volví loco con Git cuando lo usé para enviar MoMit, Me enojé por lo difícil que era usar Git, así que inventé esto
 >
 > Pero ahora, Mo Cloud Space sigue siendo un producto conceptual, por supuesto que puedes usar otros espacios en la nube.
 >
