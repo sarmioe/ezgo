@@ -10,25 +10,25 @@
 
 | command                                                      | Function                                                     |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ezgo v                                                       | Display version                                              |
-| ezgo h                                                       | Print Help default English                                   |
-| ezgo h zh_CN                                                 | Print Help of Chinese                                        |
-| ezgo h zh_TW                                                 | Print Help of Chinese Traditional                            |
-| ezgo h es                                                    | Print Help of Spanish                                        |
-| ezgo update [version]                                        | Update EasyGo                                                |
-| ezgo clone [URL] [Localpath] -branch--[branchname] -depth--[number] | Clone repo from cloud                                        |
-| ezgo sync [localpath] [URL]                                  | Run sync                                                     |
-| ezgo sync auto [time defualt is second]                      | Auto sync                                                    |
-| ezgo sync incremental                                        | Synchronize only difference files                            |
-| ezgo config                                                  | Configure EasyGo                                             |
-| ezgo env | Automatic environment check |
-| ezgo logs [level] | Output ezgo logs |
-| ezgo logs git | Output git logs |
-| ezgo logs go | Output Go logs |
-| ezgo push [commit] | Commit to remote repository |
-| ezgo pull [branch] | Pull a branch |
-| ezgo checkout [branchname] | Switch branch name |
-| ezgo conflict [way] | Resolve cloud and local conflicts |
+| ezgo -v                                                       | Display version                                              |
+| ezgo -h                                                       | Print Help default English                                   |
+| ezgo -hzc                                                     | Print Help of Chinese                                        |
+| ezgo -hzt                                                     | Print Help of Chinese Traditional                            |
+| ezgo -hes                                                     | Print Help of Spanish                                        |
+| ezgo -update [version]                                        | Update EasyGo                                                |
+| ezgo -clone [URL] [Localpath] -branch--[branchname] -depth--[number] | Clone repo from cloud                                        |
+| ezgo -sync [localpath] [URL]                                  | Run sync                                                     |
+| ezgo -sync auto [time defualt is second]                      | Auto sync                                                    |
+| ezgo -sync incremental                                        | Synchronize only difference files                            |
+| ezgo -config                                                  | Configure EasyGo                                             |
+| ezgo -env | Automatic environment check |
+| ezgo -logs [level] | Output ezgo logs |
+| ezgo -logs git | Output git logs |
+| ezgo -logs go | Output Go logs |
+| ezgo -push [commit] | Commit to remote repository |
+| ezgo -pull [branch] | Pull a branch |
+| ezgo -checkout [branchname] | Switch branch name |
+| ezgo -conflict [way] | Resolve cloud and local conflicts |
 | ezgo go build [ARCH] [System] [Output file name] | Compile Go files Only compile Go |
 | ezgo go build all [Output file name] | Compile all architecture versions of all operating systems Only compile Go |
 | ezgo go init [name] | Initialize Go project |
