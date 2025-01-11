@@ -1,9 +1,14 @@
 package main
 
 import (
+	"archive/zip"
 	"flag"
 	"fmt"
+	"io"
+	"net/http"
 	"os"
+	"os/exec"
+	"path/filepath"
 )
 
 const (
@@ -115,6 +120,81 @@ const hdtw = `
 需要更多嗎,瀏覽:https://github.com/Sarmioe/EasyGo/blob/main/%E8%AF%BB%E6%88%91.md了解詳情
 `
 
+func downloadZip(url, dest string) error {
+	resp, err := http.Get(url)
+	if err != nil {
+		return fmt.Errorf("failed to download ZIP file: %w", err)
+	}
+	defer resp.Body.Close()
+
+	out, err := os.Create(dest)
+	if err != nil {
+		return fmt.Errorf("failed to create zip file: %w", err)
+	}
+	defer out.Close()
+
+	_, err = io.Copy(out, resp.Body)
+	if err != nil {
+		return fmt.Errorf("failed to save ZIP file: %w", err)
+	}
+
+	return nil
+}
+
+func unzip(src, dest string) error {
+	r, err := zip.OpenReader(src)
+	if err != nil {
+		return fmt.Errorf("failed to open zip file: %w", err)
+	}
+	defer r.Close()
+
+	if err := os.MkdirAll(dest, 0755); err != nil {
+		return fmt.Errorf("failed to create extraction directory: %w", err)
+	}
+
+	for _, file := range r.File {
+		filePath := filepath.Join(dest, file.Name)
+
+		if file.FileInfo().IsDir() {
+			if err := os.MkdirAll(filePath, file.Mode()); err != nil {
+				return fmt.Errorf("failed to create directory: %w", err)
+			}
+			continue
+		}
+
+		outFile, err := os.Create(filePath)
+		if err != nil {
+			return fmt.Errorf("failed to create file: %w", err)
+		}
+		defer outFile.Close()
+
+		rc, err := file.Open()
+		if err != nil {
+			return fmt.Errorf("failed to open file in zip: %w", err)
+		}
+		defer rc.Close()
+
+		_, err = io.Copy(outFile, rc)
+		if err != nil {
+			return fmt.Errorf("failed to extract file: %w", err)
+		}
+	}
+
+	return nil
+}
+
+func buildSourceCode(srcDir string) error {
+	cmd := exec.Command("go", "build", "-o", "output_program")
+	cmd.Dir = srcDir
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	if err := cmd.Run(); err != nil {
+		return fmt.Errorf("build failed: %w", err)
+	}
+
+	return nil
+}
 func start() {
 	fmt.Println("To get start , view this page :https://github.com/Sarmioe/EasyGo/blob/main/README.md")
 	fmt.Println("And if you first run EasyGo , Using : 'ezgo -h' to get help")
@@ -125,6 +205,7 @@ func atfs() {
 	ayudaFlag := flag.Bool("hes", false, "Mostrar ayuda")
 	bangzhuFlag := flag.Bool("hzc", false, "输出帮助")
 	zhiyuanFlag := flag.Bool("htw", false, "輸出幫助")
+	ezgoupdate := flag.Bool("update", false, "Update EasyGo")
 	flag.Parse()
 	if *versionFlag {
 		fmt.Println("Version is:" + version)
@@ -145,6 +226,34 @@ func atfs() {
 	if *zhiyuanFlag {
 		fmt.Println(hdtw)
 		os.Exit(0)
+	}
+	if *ezgoupdate {
+		fmt.Println("EasyGo Start run build to update , download zip from https://github.com/Sarmioe/EasyGo/archive/refs/heads/main.zip")
+		zipURL := "https://github.com/Sarmioe/EasyGo/archive/refs/heads/main.zip"
+		zipDest := "source.zip"
+		extractDir := "source"
+
+		fmt.Println("Downloading ZIP file...")
+		if err := downloadZip(zipURL, zipDest); err != nil {
+			fmt.Println("Error downloading ZIP file:", err)
+			return
+		}
+
+		fmt.Println("Extracting ZIP file...")
+		if err := unzip(zipDest, extractDir); err != nil {
+			fmt.Println("Error extracting ZIP file:", err)
+			return
+		}
+
+		fmt.Println("Building source code...")
+		if err := buildSourceCode(extractDir); err != nil {
+			fmt.Println("Error building source code:", err)
+			return
+		}
+
+		fmt.Println("Build complete! The program is ready.")
+		fmt.Println("After 5 seconds , the programm will be auto exit , you need restart it.")
+		os.Exit(5)
 	}
 }
 func main() {
