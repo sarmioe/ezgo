@@ -28,15 +28,15 @@
 | ezgo checkout [nombre de la rama] | Cambiar nombre de rama |
 | ezgo conflict [vía] | Resolver conflictos locales y en la nube |
 | ezgo go build [ARCH] [System] [Output file name] | Compilar archivos Go Compilar solo Go |
-| ezgo go build all [Output file name] | Compilar todas las versiones de arquitectura de todos los sistemas operativos Compilar solo Go |
+| ezgo go build all [Nombre del archivo de salida] | Compilar todas las versiones de arquitectura de todos los sistemas operativos Compilar solo Go |
 | ezgo go init [nombre] | Inicializar proyecto Go |
 | ezgo cs sync [nombre] | Sincronizar con el espacio en la nube Mo |
 | ezgo cs config | Configurar la cuenta y la contraseña de la nube Mo |
 | ezgo cs create [nombre] | Crear un espacio en la nube Mo |
-| ezgo cs build [Language environment] [Output file name] | Especificar un entorno de lenguaje y luego compilar. El entorno se puede ver en cs.clauded.modiznodz.llc |
+| ezgo cs build [Entorno de idioma] [Nombre del archivo de salida] | Especificar un entorno de lenguaje y luego compilar. El entorno se puede ver en cs.clauded.modiznodz.llc |
 | ezgo cs download [nombre] [path] | Descargar archivos desde la nube a un directorio local. Descarga cifrada por defecto |
 | ezgo cs delete [nombre] | Eliminar proyectos en la nube. Borrar y sobrescribir automáticamente 7 veces por defecto |
-| Archivo ezgo cs [nombre] | Archivar espacio en la nube de Mo en el almacenamiento en la nube de Mo o descargarlo en un repositorio local |
-| Bifurcación ezgo cs [URL] [nombre] | Bifurcar un proyecto desde otro repositorio a la nube de Mo |
-| Copiar ezgo cs [nombre] [nombre2] | Copiar un CloudSpace a otro vacío |
-| Depoly ezgo cs [nombre del proyecto] [entorno] | Implementar un proyecto en el alojamiento sin servidor en la nube de Mo |
+| ezgo cs archive [nombre]                                     | Archivar el espacio en la nube de Mo en el almacenamiento en la nube de Mo o descargarlo al local |
+| ezgo cs fork [URL] [nombre]                                  | Bifurcar un proyecto desde otro repositorio a Mo Cloud       |
+| ezgo cs copy [nombre] [name2]                                | Copiar un CloudSpace a otro vacío                            |
+| ezgo cs depoly [nombre del proyecto] [entorno]               | Implementar un proyecto en el alojamiento sin servidor de Mo Cloud |
