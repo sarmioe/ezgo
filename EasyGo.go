@@ -199,6 +199,14 @@ func start() {
 	fmt.Println("To get start , view this page :https://github.com/Sarmioe/EasyGo/blob/main/README.md")
 	fmt.Println("And if you first run EasyGo , Using : 'ezgo -h' to get help")
 }
+func getVersion(command string, args ...string) (string, error) {
+	cmd := exec.Command(command, args...)
+	output, err := cmd.Output()
+	if err != nil {
+		return "", err
+	}
+	return string(output), nil
+}
 func atfs() {
 	versionFlag := flag.Bool("v", false, "Display Version")
 	helpFlag := flag.Bool("h", false, "Display Help")
@@ -257,20 +265,29 @@ func atfs() {
 		os.Exit(5)
 	}
 	if *checkenv {
-		fmt.Println("EasyGo need a path to check environment, please input it.")
-		fmt.Print("Path: ")
-		var path string
-		fmt.Scanln(&path)
-		os.Chdir(path)
-		fmt.Println("Current path is:", path)
 		fmt.Println("Checking environment...")
 		if _, err := exec.LookPath("git"); err != nil {
-			fmt.Println("Git not found, please install it first.")
+			fmt.Println("Git not found.")
+			os.Exit(0)
 		}
 		if _, err := exec.LookPath("go"); err != nil {
-			fmt.Println("Go not found, please install it first.")
+			fmt.Println("Go not found.")
+			os.Exit(0)
 		}
-
+		gitVersion, err := getVersion("git", "--version")
+		if err != nil {
+			fmt.Println("Error getting Git version:", err)
+			os.Exit(0)
+		} else {
+			fmt.Println("Git version:", gitVersion)
+		}
+		goVersion, err := getVersion("go", "version")
+		if err != nil {
+			fmt.Println("Error getting Go version:", err)
+			os.Exit(0)
+		} else {
+			fmt.Println("Go version:", goVersion)
+		}
 		fmt.Println("All the environment is ready.")
 		os.Exit(0)
 	}
