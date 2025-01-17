@@ -206,6 +206,7 @@ func atfs() {
 	bangzhuFlag := flag.Bool("hzc", false, "输出帮助")
 	zhiyuanFlag := flag.Bool("htw", false, "輸出幫助")
 	ezgoupdate := flag.Bool("update", false, "Update EasyGo")
+	checkenv := flag.Bool("env", false, "Check environment")
 	flag.Parse()
 	if *versionFlag {
 		fmt.Println("Version is:" + version)
@@ -254,6 +255,24 @@ func atfs() {
 		fmt.Println("Build complete! The program is ready.")
 		fmt.Println("After 5 seconds , the programm will be auto exit , you need restart it.")
 		os.Exit(5)
+	}
+	if *checkenv {
+		fmt.Println("EasyGo need a path to check environment, please input it.")
+		fmt.Print("Path: ")
+		var path string
+		fmt.Scanln(&path)
+		os.Chdir(path)
+		fmt.Println("Current path is:", path)
+		fmt.Println("Checking environment...")
+		if _, err := exec.LookPath("git"); err != nil {
+			fmt.Println("Git not found, please install it first.")
+		}
+		if _, err := exec.LookPath("go"); err != nil {
+			fmt.Println("Go not found, please install it first.")
+		}
+
+		fmt.Println("All the environment is ready.")
+		os.Exit(0)
 	}
 }
 func main() {
