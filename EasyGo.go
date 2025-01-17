@@ -140,7 +140,6 @@ func downloadZip(url, dest string) error {
 
 	return nil
 }
-
 func unzip(src, dest string) error {
 	r, err := zip.OpenReader(src)
 	if err != nil {
@@ -182,9 +181,8 @@ func unzip(src, dest string) error {
 
 	return nil
 }
-
 func buildSourceCode(srcDir string) error {
-	cmd := exec.Command("go", "build", "-o", "output_program")
+	cmd := exec.Command("go", "build")
 	cmd.Dir = srcDir
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -194,10 +192,6 @@ func buildSourceCode(srcDir string) error {
 	}
 
 	return nil
-}
-func start() {
-	fmt.Println("To get start , view this page :https://github.com/Sarmioe/EasyGo/blob/main/README.md")
-	fmt.Println("And if you first run EasyGo , Using : 'ezgo -h' to get help")
 }
 func getVersion(command string, args ...string) (string, error) {
 	cmd := exec.Command(command, args...)
@@ -215,6 +209,8 @@ func atfs() {
 	zhiyuanFlag := flag.Bool("htw", false, "輸出幫助")
 	ezgoupdate := flag.Bool("update", false, "Update EasyGo")
 	checkenv := flag.Bool("env", false, "Check environment")
+	build := flag.Bool("gobuild", false, "Build the go project.")
+	buildall := flag.Bool("gobuildall", false, "Build all the go project.")
 	flag.Parse()
 	if *versionFlag {
 		fmt.Println("Version is:" + version)
@@ -291,9 +287,18 @@ func atfs() {
 		fmt.Println("All the environment is ready.")
 		os.Exit(0)
 	}
+	if *build {
+		fmt.Println("Start build your go project.")
+		os.Exit(0)
+	}
+	if *buildall {
+		fmt.Println("Start build your all the go project.")
+		os.Exit(0)
+	}
 }
 func main() {
 	fmt.Println("Welcome to EasyGo!")
 	atfs()
-	start()
+	fmt.Println("To get start , view this page :https://github.com/Sarmioe/EasyGo/blob/main/README.md")
+	fmt.Println("And if you first run EasyGo , Using : 'ezgo -h' to get help")
 }

@@ -29,9 +29,9 @@
 | ezgo -pull [branch] | Pull a branch |
 | ezgo -checkout [branchname] | Switch branch name |
 | ezgo -conflict [way] | Resolve cloud and local conflicts |
-| ezgo go build [ARCH] [System] [Output file name] | Compile Go files Only compile Go |
-| ezgo go build all [Output file name] | Compile all architecture versions of all operating systems Only compile Go |
-| ezgo go init [name] | Initialize Go project |
+| ezgo -go -build [ARCH] [System] [Output file name] | Compile Go files Only compile Go |
+| ezgo -go -build -all [Output file name] | Compile all architecture versions of all operating systems Only compile Go |
+| ezgo -go -init [name] | Initialize Go project |
 | ezgo cs sync [name] | Synchronize to Mo cloud space |
 | ezgo cs config | Configure Mo cloud account and password |
 | ezgo cs create [name] | Create a Mo cloud space |
