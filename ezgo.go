@@ -15,8 +15,8 @@ import (
 )
 
 const (
-	version = "0.0.2"
-	hdv     = "0.0.4"
+	version = "EasyGo_V0.0.2"
+	hdv     = "0.0.5"
 )
 const hden = `
 Using -h only English version ; If you using the others languages , Using ezgo -hes (es is for Espanol , mean is Sypanish)and more.
@@ -253,13 +253,21 @@ func atfs() {
 	ayudaFlag := flag.Bool("hes", false, "Mostrar ayuda")
 	bangzhuFlag := flag.Bool("hzc", false, "输出帮助")
 	zhiyuanFlag := flag.Bool("htw", false, "輸出幫助")
+	helpversion := flag.Bool("hdv", false, "Display Help document version")
 	ezgoupdate := flag.Bool("update", false, "Update EasyGo")
 	checkenv := flag.Bool("env", false, "Check environment")
 	build := flag.Bool("gobuild", false, "Build the go project.")
 	buildall := flag.Bool("gobuildall", false, "Build all the go project.")
+	gitpush := flag.Bool("push", false, "Push the project to remote repository.")
 	flag.Parse()
 	if *versionFlag {
 		fmt.Println("Version is:" + version)
+		fmt.Println("Will download the latest version and update the programm?")
+		fmt.Println("Please use 'ezgo -update' or view : https://github.com/Sarmioe/EasyGo/releases to update the programm.")
+		os.Exit(0)
+	}
+	if *helpversion {
+		fmt.Println("Help document version is:" + hdv)
 		os.Exit(0)
 	}
 	if *helpFlag {
@@ -440,8 +448,12 @@ func atfs() {
 			fmt.Println("At the floader:", outputPath)
 		}
 		fmt.Println("Build succeeded: %s\n")
-		fmt.Println("Created all the 12 Systems , 11 archs , and 41 files.")
+		fmt.Println("Created all the 12 Systems , 11 archs , and 36 output files.")
 		os.Exit(0)
+		if *gitpush {
+			fmt.Println("Start push your project to remote repository.")
+
+		}
 	}
 }
 func main() {
