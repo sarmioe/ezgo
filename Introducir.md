@@ -1,8 +1,8 @@
-# EasyGo es un programa que hace que Git y Mo CloudSpace sean fáciles de usar.
+# ezgoit es un programa que hace que Git y Mo CloudSpace sean fáciles de usar.
 
-> La razón principal es que me volví loco con Git cuando lo usé para enviar MoMit, Me enojé por lo difícil que era usar Git, así que inventé esto
+> La razón principal es que me volví loco con Git cuando lo usé para enviar mosiuter, Me enojé por lo difícil que era usar Git, así que inventé esto
 >
-> Pero ahora, Mo Cloud Space sigue siendo un producto conceptual, por supuesto que puedes usar otros espacios en la nube.
+> Pero ahora, Mo CloudSpace sigue siendo un producto conceptual, por supuesto que puedes usar otros espacios en la nube.
 >
 > Veamos cómo usarlo. Primero debes descargar Git y Go y luego configurar las variables de entorno
 
