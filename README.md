@@ -1,8 +1,8 @@
-#  EasyGo is a program that makes Git and Mo CloudSpace easy to use.
+#  ezgoit is a program that makes Git and Mo CloudSpace easy to use.
 
-> The main reason is that I was driven crazy by Git when I used it to submit MoMit, so I decided to build this, which supports automatic synchronization.
+> The main reason is that I was driven crazy by Git when I used it to submit mosiuter, so I decided to build this, which supports automatic synchronization.
 >
-> But now, Mo Cloud Space is still a concept product, of course you can use other cloud spaces.
+> But now, Mo CloudSpace is still a concept product, of course you can use other cloud spaces.
 >
 > Let's see how to use it. You need to download Git and Go first and then configure the environment variables
 
