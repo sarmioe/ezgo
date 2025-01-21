@@ -1,45 +1,51 @@
-#  EasyGo is a program that makes Git and Mo CloudSpace easy to use.
+# ezgoit A small tool that makes Git and Go easy to use
 
-> The main reason is that I was driven crazy by Git when I used it to submit MoMit, so I decided to build this, which supports automatic synchronization.
+> This tool makes Go and Git easy to use. Just do it like this: `ezgo -fmt` to directly format the Go language code
 >
-> But now, Mo Cloud Space is still a concept product, of course you can use other cloud spaces.
+> Compared with Git and Go, which require remembering complex commands and a lot of interactions, ezgoit makes them simpler.
 >
-> Let's see how to use it. You need to download Git and Go first and then configure the environment variables
+> ezgoit comes from: Easy+Go+Git. When it is actually running, it is simplified to ezgo for easy operation.
+>
+> Open source tool, conditionally open source based on GPLv3 license.
 
-[简体中文版本](读我.md) [Español Versión](Introducir.md) 
+[简体中文版本](读我.md)
 
-| command                                                      | Function                                                     |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ezgo -v                                                       | Display version                                              |
-| ezgo -h                                                       | Print Help default English                                   |
-| ezgo -hzc                                                     | Print Help of Chinese                                        |
-| ezgo -hzt                                                     | Print Help of Chinese Traditional                            |
-| ezgo -hes                                                     | Print Help of Spanish                                        |
-| ezgo -update [version]                                        | Update EasyGo                                                |
-| ezgo -clone [URL] [Localpath] -branch--[branchname] -depth--[number] | Clone repo from cloud                                        |
-| ezgo -sync [localpath] [URL]                                  | Run sync                                                     |
-| ezgo -sync auto [time defualt is second]                      | Auto sync                                                    |
-| ezgo -sync incremental                                        | Synchronize only difference files                            |
-| ezgo -config                                                  | Configure EasyGo                                             |
-| ezgo -env | Automatic environment check |
-| ezgo -logs [level] | Output ezgo logs |
-| ezgo -logs git | Output git logs |
-| ezgo -logs go | Output Go logs |
-| ezgo -push [commit] | Commit to remote repository |
-| ezgo -pull [branch] | Pull a branch |
-| ezgo -checkout [branchname] | Switch branch name |
-| ezgo -conflict [way] | Resolve cloud and local conflicts |
-| ezgo -go -build [ARCH] [System] [Output file name] | Compile Go files Only compile Go |
-| ezgo -go -build -all [Output file name] | Compile all architecture versions of all operating systems Only compile Go |
-| ezgo -go -init [name] | Initialize Go project |
-| ezgo cs sync [name] | Synchronize to Mo cloud space |
-| ezgo cs config | Configure Mo cloud account and password |
-| ezgo cs create [name] | Create a Mo cloud space |
-| ezgo cs build [Language environment] [Output file name] | Specify a language environment and then compile. The environment can be viewed in cs.clauded.modiznodz.llc |
-| ezgo cs download [name] [path] | Download files from the cloud to a local directory. Encrypted download by default |
-| ezgo cs delete [name] | Delete cloud projects. Automatically erase and overwrite 7 times by default |
-| ezgo cs archive [name] | Archive Mo cloud space to Mo cloud storage or download to local |
-| ezgo cs fork [URL] [name] | Fork a project from another repository to Mo cloud |
-| ezgo cs copy [name] [name2] | Copy a CloudSpace to another empty one |
-| ezgo cs depoly [projectname] [environment] | Deploy a project to Mo cloud serverless hosting |
+## Let's see how to use it
 
+### Basic command list:
+
+| Command | Explanation |
+| --------- | ------------------------------------------------------------ |
+| ezgo -v | Output version |
+| ezgo -u | Update version online |
+| ezgo -un | Update version offline, need to specify the source package location |
+| ezgo -h | Output help (simplified version) |
+| ezgo -c | Configure ezgoit so that it does not need to specify parameters each time it runs. Of course, the function of using bat or shell script is the same |
+| ezgo -env | Check Git and Go language environment and version |
+| ezgo -l | Output log |
+
+### Go command list:
+
+| Command | Explanation |
+| -------- | -------------------------------- |
+| ezgo -g | Check Go environment |
+| ezgo -gi | Initialize Go project |
+| ezgo -b | Compile Go project |
+| ezgo -ba | Compile all versions of the environment supported by Go language |
+| ezgo -f | Format Go project |
+| ezgo -ge | Download dependencies |
+| ezgo -t | Test code |
+| ezgo -m | Generate go.mod file |
+
+### Git command list:
+
+| Command | Explanation |
+| --------- | ----------------------------- |
+| ezgo -gic | Configure Git username and password |
+| ezgo -gi | Initialize a Git repository |
+| ezgo -gc | Clone the repository to local |
+| ezgo -cm | Commit changes with one click |
+| ezgo -cmt | Cycle git add . and then commit changes with one click |
+| ezgo -ch | Switch branches |
+| ezgo -br | Create,list and delete branches and more. |
+| ezgo -mr | Merge branches |
