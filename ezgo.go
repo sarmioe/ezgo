@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	version = "EasyGo_V0.0.2"
+	version = "ezgoit_V0.0.2"
 	hden    = `If you want see it , Please view this page :https://github.com/Sarmioe/ezgoit/blob/main/README.md`
 )
 
@@ -124,7 +124,7 @@ func unzip(src, dest string) error {
 	return nil
 }
 func buildSourceCode(srcDir string) error {
-	cmd := exec.Command("go", "build", "-o", "EasyGo")
+	cmd := exec.Command("go", "build")
 	cmd.Dir = srcDir
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -143,28 +143,54 @@ func getVersion(command string, args ...string) (string, error) {
 	}
 	return string(output), nil
 }
+func enver() {
+	fmt.Println("Checking environment...")
+	if _, err := exec.LookPath("git"); err != nil {
+		fmt.Println("Git not found.")
+		os.Exit(0)
+	}
+	if _, err := exec.LookPath("go"); err != nil {
+		fmt.Println("Go not found.")
+		os.Exit(0)
+	}
+	gitVersion, err := getVersion("git", "--version")
+	if err != nil {
+		fmt.Println("Error getting Git version:", err)
+		os.Exit(0)
+	} else {
+		fmt.Println("Git version:", gitVersion)
+	}
+	goVersion, err := getVersion("go", "version")
+	if err != nil {
+		fmt.Println("Error getting Go version:", err)
+		os.Exit(0)
+	} else {
+		fmt.Println("Go version:", goVersion)
+	}
+	fmt.Println("All the environment is ready.")
+}
 func atfs() {
-	versionFlag := flag.Bool("v", false, "Display Version")
-	helpFlag := flag.Bool("h", false, "Display Help")
-	ezgoupdate := flag.Bool("u", false, "Update EasyGo")
+	versione := flag.Bool("v", false, "Display Version")
+	help := flag.Bool("h", false, "Display Help")
+	ezgoupdate := flag.Bool("u", false, "Update ezgoit")
 	checkenv := flag.Bool("env", false, "Check environment")
 	build := flag.Bool("b", false, "Build the go project.")
 	buildall := flag.Bool("ba", false, "Build all the go project.")
 	gitpush := flag.Bool("push", false, "Push the project to remote repository.")
 	flag.Parse()
-	if *versionFlag {
+	if *versione {
 		fmt.Println("Version is:" + version)
 		fmt.Println("Will download the latest version and update the programm?")
-		fmt.Println("Please use 'ezgo -update' or view : https://github.com/Sarmioe/EasyGo/releases to update the programm.")
+		fmt.Println("Please use 'ezgo -update' or view : https://github.com/Sarmioe/ezgoit/releases to update the programm.")
 		os.Exit(0)
 	}
-	if *helpFlag {
+	if *help {
 		fmt.Println(hden)
 		os.Exit(0)
 	}
 	if *ezgoupdate {
-		fmt.Println("EasyGo Start run build to update , download zip from https://github.com/Sarmioe/EasyGo/archive/refs/heads/main.zip")
-		zipURL := "https://github.com/Sarmioe/EasyGo/archive/refs/heads/main.zip"
+		fmt.Println("ezgoit Start run build to update , download zip from https://github.com/Sarmioe/ezgoit/archive/refs/heads/main.zip")
+		zipURL := "https://github.com/Sarmioe/ezgoit/archive/refs/heads/main.zip"
 		zipDest := "source.zip"
 		extractDir := "source"
 
@@ -179,11 +205,11 @@ func atfs() {
 			fmt.Println("Error extracting ZIP file:", err)
 			return
 		}
-
+		enver()
 		fmt.Println("Building source code...")
 		if err := buildSourceCode(extractDir); err != nil {
 			fmt.Println("Error building source code:", err)
-			return
+			os.Exit(1)
 		}
 
 		fmt.Println("Build complete! The program is ready.")
@@ -191,30 +217,7 @@ func atfs() {
 		os.Exit(5)
 	}
 	if *checkenv {
-		fmt.Println("Checking environment...")
-		if _, err := exec.LookPath("git"); err != nil {
-			fmt.Println("Git not found.")
-			os.Exit(0)
-		}
-		if _, err := exec.LookPath("go"); err != nil {
-			fmt.Println("Go not found.")
-			os.Exit(0)
-		}
-		gitVersion, err := getVersion("git", "--version")
-		if err != nil {
-			fmt.Println("Error getting Git version:", err)
-			os.Exit(0)
-		} else {
-			fmt.Println("Git version:", gitVersion)
-		}
-		goVersion, err := getVersion("go", "version")
-		if err != nil {
-			fmt.Println("Error getting Go version:", err)
-			os.Exit(0)
-		} else {
-			fmt.Println("Go version:", goVersion)
-		}
-		fmt.Println("All the environment is ready.")
+		enver()
 		os.Exit(0)
 	}
 	if *build {
@@ -333,10 +336,10 @@ func atfs() {
 	}
 }
 func main() {
-	fmt.Println("Welcome to EasyGo!")
+	fmt.Println("Welcome to ezgoit!")
 	fmt.Println("Powered by Sarmioe and Golang V1.23.4")
 	atfs()
-	fmt.Println("To get help document , view this page :https://github.com/Sarmioe/EasyGo/blob/main/README.md")
-	fmt.Println("And if you not now how can using EasyGo , Using : 'ezgo -h' to get help")
+	fmt.Println("To get help document , view this page :https://github.com/Sarmioe/ezgoit/blob/main/README.md")
+	fmt.Println("And if you not now how can using ezgoit , Using : 'ezgo -h' to get help")
 	fmt.Println("Now , you no add any bool value , the programm will be exit...")
 }

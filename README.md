@@ -1,6 +1,6 @@
 # ezgoit A small tool that makes Git and Go easy to use
 
-> This tool makes Go and Git easy to use. Just do it like this: `ezgo -fmt` to directly format the Go language code
+> This tool makes Go and Git easy to use. Just do it like this: `ezgo -f` to directly format the Go language code
 >
 > Compared with Git and Go, which require remembering complex commands and a lot of interactions, ezgoit makes them simpler.
 >
