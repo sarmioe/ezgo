@@ -340,6 +340,5 @@ func main() {
 	fmt.Println("Powered by Sarmioe and Golang V1.23.4")
 	atfs()
 	fmt.Println("To get help document , view this page :https://github.com/Sarmioe/ezgoit/blob/main/README.md")
-	fmt.Println("And if you not now how can using ezgoit , Using : 'ezgo -h' to get help")
 	fmt.Println("Now , you no add any bool value , the programm will be exit...")
 }
