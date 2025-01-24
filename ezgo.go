@@ -6,12 +6,14 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"math/rand"
 	"net/http"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"runtime"
 	"strings"
+	"time"
 )
 
 const (
@@ -169,6 +171,21 @@ func enver() {
 	}
 	fmt.Println("All the environment is ready.")
 }
+func generateRandomCommitMessage() string {
+	const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	const digits = "0123456789"
+	const length = 10
+
+	b := make([]byte, length)
+	for i := range b {
+		if rand.Intn(2) == 0 {
+			b[i] = letterBytes[rand.Intn(len(letterBytes))]
+		} else {
+			b[i] = digits[rand.Intn(len(digits))]
+		}
+	}
+	return string(b)
+}
 func atfs() {
 	versione := flag.Bool("v", false, "Display Version")
 	help := flag.Bool("h", false, "Display Help")
@@ -176,12 +193,13 @@ func atfs() {
 	checkenv := flag.Bool("env", false, "Check environment")
 	build := flag.Bool("b", false, "Build the go project.")
 	buildall := flag.Bool("ba", false, "Build all the go project.")
-	gitpush := flag.Bool("push", false, "Push the project to remote repository.")
+	gitpush := flag.Bool("cm", false, "Commit and push the project to remote repository.")
+	gitpushall := flag.Bool("cmt", false, "Commit and push the project to remote repository in every seconds.")
 	flag.Parse()
 	if *versione {
 		fmt.Println("Version is:" + version)
-		fmt.Println("Will download the latest version and update the programm?")
-		fmt.Println("Please use 'ezgo -update' or view : https://github.com/Sarmioe/ezgoit/releases to update the programm.")
+		fmt.Println("Will download the latest version and update the program?")
+		fmt.Println("Please use 'ezgo -update' or view : https://github.com/Sarmioe/ezgoit/releases to update the program.")
 		os.Exit(0)
 	}
 	if *help {
@@ -213,7 +231,7 @@ func atfs() {
 		}
 
 		fmt.Println("Build complete! The program is ready.")
-		fmt.Println("After 5 seconds , the programm will be auto exit , you need restart it.")
+		fmt.Println("After 5 seconds , the program will be auto exit , you need restart it.")
 		os.Exit(5)
 	}
 	if *checkenv {
@@ -333,6 +351,78 @@ func atfs() {
 			fmt.Println("Start push your project to remote repository.")
 
 		}
+		if *gitpushall {
+			fmt.Print("Enter the Git repository path: ")
+			scanner := bufio.NewScanner(os.Stdin)
+			scanner.Scan()
+			repoPath := scanner.Text()
+
+			fmt.Print("Enter the sync interval (in seconds): ")
+			scanner.Scan()
+			var syncIntervalSeconds int
+			_, err := fmt.Sscanf(scanner.Text(), "%d", &syncIntervalSeconds)
+			if err != nil {
+				fmt.Printf("Invalid input: %v\n", err)
+				return
+			}
+			syncInterval := time.Duration(syncIntervalSeconds) * time.Second
+
+			rand.Seed(time.Now().UnixNano())
+
+			for {
+				cmd := exec.Command("git", "-C", repoPath, "add", ".")
+				err := cmd.Run()
+				if err != nil {
+					fmt.Printf("Error adding changes: %v\n", err)
+					time.Sleep(syncInterval)
+					continue
+				}
+
+				cmd = exec.Command("git", "-C", repoPath, "status", "--porcelain")
+				out, err := cmd.Output()
+				if err != nil {
+					fmt.Printf("Error checking repository status: %v\n", err)
+					time.Sleep(syncInterval)
+					continue
+				}
+
+				if len(out) > 0 {
+					fmt.Println("Changes detected in the repository.")
+					fmt.Print("Do you want to sync these changes? (y/n): ")
+					scanner.Scan()
+					response := scanner.Text()
+
+					if response == "y" {
+						commitMessage := generateRandomCommitMessage()
+						fmt.Printf("Committing changes with message: %s\n", commitMessage)
+
+						cmd = exec.Command("git", "-C", repoPath, "commit", "-m", commitMessage)
+						err = cmd.Run()
+						if err != nil {
+							fmt.Printf("Error committing changes: %v\n", err)
+							continue
+						}
+
+						cmd = exec.Command("git", "-C", repoPath, "push")
+						err = cmd.Run()
+						if err != nil {
+							fmt.Printf("Error pushing changes: %v\n", err)
+							continue
+						}
+
+						fmt.Println("Changes committed and pushed successfully.")
+					} else if response == "n" {
+						fmt.Println("Skipping sync. Waiting for the next check...")
+					} else {
+						fmt.Println("Invalid input. Please enter 'y' or 'n'.")
+					}
+				} else {
+					fmt.Println("No changes detected , If you not need sync , please enter 'ctrl+c' to exit.")
+				}
+
+				time.Sleep(syncInterval)
+			}
+		}
 	}
 }
 func main() {
@@ -340,5 +430,5 @@ func main() {
 	fmt.Println("Powered by Sarmioe and Golang V1.23.4")
 	atfs()
 	fmt.Println("To get help document , view this page :https://github.com/Sarmioe/ezgoit/blob/main/README.md")
-	fmt.Println("Now , you no add any bool value , the programm will be exit...")
+	fmt.Println("Now , you no add any bool value , the program will be exit...")
 }
