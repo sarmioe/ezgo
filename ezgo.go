@@ -17,7 +17,7 @@ import (
 )
 
 const (
-	version = "ezgoit_V0.0.2"
+	version = "ezgoit_V0.0.3"
 	hden    = `If you want see it , Please view this page :https://github.com/Sarmioe/ezgoit/blob/main/README.md`
 )
 
@@ -426,6 +426,7 @@ func atfs() {
 	}
 }
 func main() {
+fmt
 	fmt.Println("Welcome to ezgoit!")
 	fmt.Println("Powered by Sarmioe and Golang V1.23.4")
 	atfs()
