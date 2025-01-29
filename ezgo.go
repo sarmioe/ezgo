@@ -426,7 +426,7 @@ func atfs() {
 	}
 }
 func main() {
-fmt
+ fmt.Println("Special edition for the Year of the Snake.")
 	fmt.Println("Welcome to ezgoit!")
 	fmt.Println("Powered by Sarmioe and Golang V1.23.4")
 	atfs()
