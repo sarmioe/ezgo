@@ -305,7 +305,7 @@ func atfs() {
 			os.Exit(1)
 		}
 
-		fmt.Print("Enter output binary base name (default: Go-project): ")
+		fmt.Print("Enter abstule output binary base name (default: Go-project): ")
 		outputBaseName, _ := reader.ReadString('\n')
 		outputBaseName = strings.TrimSpace(outputBaseName)
 		if outputBaseName == "" {
@@ -426,7 +426,7 @@ func atfs() {
 	}
 }
 func main() {
- fmt.Println("Special edition for the Year of the Snake.")
+	fmt.Println("Special edition for the Year of the Snake.")
 	fmt.Println("Welcome to ezgoit!")
 	fmt.Println("Powered by Sarmioe and Golang V1.23.4")
 	atfs()
