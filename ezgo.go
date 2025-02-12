@@ -191,6 +191,8 @@ func atfs() {
 	help := flag.Bool("h", false, "Display Help")
 	ezgoupdate := flag.Bool("u", false, "Update ezgoit")
 	checkenv := flag.Bool("env", false, "Check environment")
+	checkgoenv := flag.Bool("ego", false, "Check Golang environment")
+	checkgitenv := flag.Bool("egi", false, "Check Git environment")
 	build := flag.Bool("b", false, "Build the go project.")
 	buildall := flag.Bool("ba", false, "Build all the go project.")
 	gitpush := flag.Bool("cm", false, "Commit and push the project to remote repository.")
@@ -236,6 +238,38 @@ func atfs() {
 	}
 	if *checkenv {
 		enver()
+		os.Exit(0)
+	}
+	if *checkgoenv {
+		fmt.Println("Checking environment...")
+		if _, err := exec.LookPath("go"); err != nil {
+		fmt.Println("Go not found.")
+		os.Exit(0)
+		}
+		goVersion, err := getVersion("go", "version")
+		if err != nil {
+		fmt.Println("Error getting Go version:", err)
+		os.Exit(0)
+		} else {
+		fmt.Println("Go version:", goVersion)
+		}
+		fmt.Println("All the environment is ready.")
+		os.Exit(0)
+	}
+	if *checkgitenv {
+		fmt.Println("Checking environment...")
+		if _, err := exec.LookPath("git"); err != nil {
+		fmt.Println("Git not found.")
+		os.Exit(0)
+		}
+		gitVersion, err := getVersion("git", "--version")
+		if err != nil {
+		fmt.Println("Error getting Git version:", err)
+		os.Exit(0)
+		} else {
+		fmt.Println("Git version:", gitVersion)
+		}
+		fmt.Println("All the environment is ready.")
 		os.Exit(0)
 	}
 	if *build {
