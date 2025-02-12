@@ -1,3 +1,4 @@
+[简体中文版本](读我.md)
 # ezgoit A small tool that makes Git and Go easy to use
 
 > This tool makes Go and Git easy to use. Just do it like this: `ezgo -f` to directly format the Go language code
@@ -8,7 +9,11 @@
 >
 > Open source tool, conditionally open source based on GPLv3 license.
 
-[简体中文版本](读我.md)
+## Basic conditions
+
+>You need to install Go and Git environment first, and configure environment variables.
+>
+>The operating system supports all versions that can be compiled for the Go language.
 
 ## Let's see how to use it
 
@@ -28,7 +33,7 @@
 
 | Command | Explanation |
 | -------- | -------------------------------- |
-| ezgo -g | Check Go environment |
+| ezgo -ego | Check Go environment |
 | ezgo -gi | Initialize Go project |
 | ezgo -b | Compile Go project |
 | ezgo -ba | Compile all versions of the environment supported by Go language |
@@ -41,6 +46,7 @@
 
 | Command | Explanation |
 | --------- | ----------------------------- |
+| ezgo -egi | Check Git environment |
 | ezgo -gic | Configure Git username and password |
 | ezgo -gi | Initialize a Git repository |
 | ezgo -gc | Clone the repository to local |
