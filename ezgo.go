@@ -61,7 +61,6 @@ var targets = []struct {
 	{"plan9", "arm"},
 	{"aix", "ppc64"},
 	{"illumos", "amd64"},
-	{"hurd", "amd64"},
 }
 
 func downloadZip(url, dest string) error {
@@ -378,8 +377,8 @@ func atfs() {
 			}
 			fmt.Println("At the floader:", outputPath)
 		}
-		fmt.Println("Build succeeded: %s\n")
-		fmt.Println("Created all the 12 Systems , 11 archs , and 36 output files.")
+		fmt.Println("Build succeeded!")
+		fmt.Println("If you succeeded , you can got all the 11 Systems , 11 archs , and 36 output files.")
 		os.Exit(0)
 		if *gitpush {
 			fmt.Println("Start push your project to remote repository.")

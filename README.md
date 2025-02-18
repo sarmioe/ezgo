@@ -17,7 +17,7 @@
 
 ## Let's see how to use it
 
-### Basic command list:
+### Basic commands list:
 
 | Command | Explanation |
 | --------- | ------------------------------------------------------------ |
@@ -29,7 +29,7 @@
 | ezgo -env | Check Git and Go language environment and version |
 | ezgo -l | Output log |
 
-### Go command list:
+### Go commands list:
 
 | Command | Explanation |
 | -------- | -------------------------------- |
@@ -42,7 +42,7 @@
 | ezgo -t | Test code |
 | ezgo -m | Generate go.mod file |
 
-### Git command list:
+### Git commands list:
 
 | Command | Explanation |
 | --------- | ----------------------------- |
