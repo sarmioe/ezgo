@@ -17,7 +17,7 @@ import (
 )
 
 const (
-	version = "ezgoit_V0.0.4"
+	version = "ezgoit_V0.0.5"
 	hden    = `If you want see it , Please view this page :https://github.com/Sarmioe/ezgoit/blob/main/README.md`
 )
 
@@ -446,6 +446,6 @@ func main() {
 	fmt.Println("Welcome to ezgoit!")
 	fmt.Println("Powered by Sarmioe and Golang V1.23.4")
 	atfs()
-	fmt.Println("To get help document , view this page :https://github.com/Sarmioe/ezgoit/blob/main/README.md")
 	fmt.Println("Now , you no add any bool value , the program will be exit...")
+	fmt.Println("To get help document , view this page :https://github.com/Sarmioe/ezgoit/blob/main/README.md")
 }
