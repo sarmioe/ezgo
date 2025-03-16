@@ -17,7 +17,7 @@ import (
 )
 
 const (
-	version = "ezgoit_V0.0.3"
+	version = "ezgoit_V0.0.5"
 	hden    = `If you want see it , Please view this page :https://github.com/Sarmioe/ezgoit/blob/main/README.md`
 )
 
@@ -60,7 +60,6 @@ var targets = []struct {
 	{"plan9", "386"},
 	{"plan9", "arm"},
 	{"aix", "ppc64"},
-	{"illumos", "amd64"},
 }
 
 func downloadZip(url, dest string) error {
@@ -144,14 +143,9 @@ func getVersion(command string, args ...string) (string, error) {
 	}
 	return string(output), nil
 }
-func enver() {
-	fmt.Println("Checking environment...")
+func giv() {
 	if _, err := exec.LookPath("git"); err != nil {
 		fmt.Println("Git not found.")
-		os.Exit(0)
-	}
-	if _, err := exec.LookPath("go"); err != nil {
-		fmt.Println("Go not found.")
 		os.Exit(0)
 	}
 	gitVersion, err := getVersion("git", "--version")
@@ -161,6 +155,12 @@ func enver() {
 	} else {
 		fmt.Println("Git version:", gitVersion)
 	}
+}
+func gov() {
+	if _, err := exec.LookPath("go"); err != nil {
+		fmt.Println("Go not found.")
+		os.Exit(0)
+	}
 	goVersion, err := getVersion("go", "version")
 	if err != nil {
 		fmt.Println("Error getting Go version:", err)
@@ -168,6 +168,11 @@ func enver() {
 	} else {
 		fmt.Println("Go version:", goVersion)
 	}
+}
+func enver() {
+	fmt.Println("Checking environment...")
+	giv()
+	gov()
 	fmt.Println("All the environment is ready.")
 }
 func generateRandomCommitMessage() string {
@@ -200,7 +205,7 @@ func atfs() {
 	if *versione {
 		fmt.Println("Version is:" + version)
 		fmt.Println("Will download the latest version and update the program?")
-		fmt.Println("Please use 'ezgo -update' or view : https://github.com/Sarmioe/ezgoit/releases to update the program.")
+		fmt.Println("Please run 'ezgo -u' or view : https://github.com/Sarmioe/ezgoit/releases to update the program.")
 		os.Exit(0)
 	}
 	if *help {
@@ -240,35 +245,15 @@ func atfs() {
 		os.Exit(0)
 	}
 	if *checkgoenv {
-		fmt.Println("Checking environment...")
-		if _, err := exec.LookPath("go"); err != nil {
-		fmt.Println("Go not found.")
-		os.Exit(0)
-		}
-		goVersion, err := getVersion("go", "version")
-		if err != nil {
-		fmt.Println("Error getting Go version:", err)
-		os.Exit(0)
-		} else {
-		fmt.Println("Go version:", goVersion)
-		}
-		fmt.Println("All the environment is ready.")
+		fmt.Println("Checking golang environment...")
+		gov()
+		fmt.Println("All the golang environment is ready.")
 		os.Exit(0)
 	}
 	if *checkgitenv {
-		fmt.Println("Checking environment...")
-		if _, err := exec.LookPath("git"); err != nil {
-		fmt.Println("Git not found.")
-		os.Exit(0)
-		}
-		gitVersion, err := getVersion("git", "--version")
-		if err != nil {
-		fmt.Println("Error getting Git version:", err)
-		os.Exit(0)
-		} else {
-		fmt.Println("Git version:", gitVersion)
-		}
-		fmt.Println("All the environment is ready.")
+		fmt.Println("Checking git environment...")
+		giv()
+		fmt.Println("All the git environment is ready.")
 		os.Exit(0)
 	}
 	if *build {
@@ -378,11 +363,10 @@ func atfs() {
 			fmt.Println("At the floader:", outputPath)
 		}
 		fmt.Println("Build succeeded!")
-		fmt.Println("If you succeeded , you can got all the 11 Systems , 11 archs , and 36 output files.")
 		os.Exit(0)
 		if *gitpush {
-			fmt.Println("Start push your project to remote repository.")
-
+			fmt.Println("Emm...")
+			os.Exit(0)
 		}
 		if *gitpushall {
 			fmt.Print("Enter the Git repository path: ")
@@ -459,10 +443,9 @@ func atfs() {
 	}
 }
 func main() {
-	fmt.Println("Special edition for the Year of the Snake.")
 	fmt.Println("Welcome to ezgoit!")
 	fmt.Println("Powered by Sarmioe and Golang V1.23.4")
 	atfs()
-	fmt.Println("To get help document , view this page :https://github.com/Sarmioe/ezgoit/blob/main/README.md")
 	fmt.Println("Now , you no add any bool value , the program will be exit...")
+	fmt.Println("To get help document , view this page :https://github.com/Sarmioe/ezgoit/blob/main/README.md")
 }
