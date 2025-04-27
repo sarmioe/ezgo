@@ -202,7 +202,7 @@ func atfs() {
 	gitpush := flag.Bool("cm", false, "Commit and push the project to remote repository.")
 	gitpushall := flag.Bool("cmt", false, "Commit and push the project to remote repository in every seconds.")
 	flag.Parse()
-fpm -s dir -t deb -n myapp -v 1.0.0 --prefix /usr/bin myapp	if *versione {
+        if *versione {
 		fmt.Println("Version is:" + version)
 		fmt.Println("Will download the latest version and update the program?")
 		fmt.Println("Please run 'ezgo -u' or view : https://github.com/Sarmioe/ezgoit/releases to update the program.")
@@ -322,7 +322,7 @@ fpm -s dir -t deb -n myapp -v 1.0.0 --prefix /usr/bin myapp	if *versione {
 			fmt.Println("The specified path does not exist. Please try again.")
 			os.Exit(1)
 		}
-fpm -s dir -t deb -n myapp -v 1.0.0 --prefix /usr/bin myapp
+
 		fmt.Print("Enter abstule output binary base name (default: Go-project): ")
 		outputBaseName, _ := reader.ReadString('\n')
 		outputBaseName = strings.TrimSpace(outputBaseName)
