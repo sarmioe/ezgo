@@ -202,7 +202,7 @@ func atfs() {
 	gitpush := flag.Bool("cm", false, "Commit and push the project to remote repository.")
 	gitpushall := flag.Bool("cmt", false, "Commit and push the project to remote repository in every seconds.")
 	flag.Parse()
-	if *versione {
+        if *versione {
 		fmt.Println("Version is:" + version)
 		fmt.Println("Will download the latest version and update the program?")
 		fmt.Println("Please run 'ezgo -u' or view : https://github.com/Sarmioe/ezgoit/releases to update the program.")
@@ -444,7 +444,7 @@ func atfs() {
 }
 func main() {
 	fmt.Println("Welcome to ezgoit!")
-	fmt.Println("Powered by Sarmioe and Golang V1.23.4")
+	fmt.Println("Powered by Sarmioe and Golang V1.24.2")
 	atfs()
 	fmt.Println("Now , you no add any bool value , the program will be exit...")
 	fmt.Println("To get help document , view this page :https://github.com/Sarmioe/ezgoit/blob/main/README.md")
