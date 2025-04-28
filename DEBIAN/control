@@ -1,0 +1,5 @@
+Package: ezgo
+Version: 0.0.5
+Architecture: amd64
+Maintainer: Privacidad Mo Kanove
+Description: ezgoit : A small tool that makes Git and Go easy to use
